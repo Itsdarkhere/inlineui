@@ -1,0 +1,207 @@
+/**
+ * CommandPalette Component Harness
+ *
+ * A command palette / search interface built on cmdk.
+ * Provides a power-user interface for quick actions and navigation with keyboard support.
+ *
+ * STRUCTURE:
+ * - Dialog overlay (optional, if modal)
+ * - Search input at the top
+ * - Grouped list of commands/actions
+ * - Keyboard shortcut hints
+ * - Empty state when no results
+ *
+ * STYLE .MD SHOULD CUSTOMIZE:
+ * - Dialog/container: background, border, radius, shadow, max-width, max-height
+ * - Search input: background, border, font-size, placeholder color, icon
+ * - Group headings: font-size, color, padding, text-transform
+ * - Items: padding, font-size, color, hover/selected background
+ * - Item icons: size, color, spacing
+ * - Keyboard shortcuts: font-family (mono), background, border, radius
+ * - Empty state: icon, text color, font-size
+ * - Separator: color, margin
+ * - Animation: enter/exit for modal, selection transitions
+ */
+
+import * as React from "react";
+import { Command } from "cmdk";
+
+/** Individual command item */
+export interface CommandItem {
+  /** Unique identifier */
+  id: string;
+  /** Display label */
+  label: string;
+  /** Optional icon */
+  icon?: React.ReactNode;
+  /** Optional keyboard shortcut hint (e.g., "Cmd+K") */
+  shortcut?: string;
+  /** Keywords for search matching (not displayed) */
+  keywords?: string[];
+  /** Whether the item is disabled */
+  disabled?: boolean;
+  /** Callback when item is selected */
+  onSelect?: () => void;
+}
+
+/** Group of related commands */
+export interface CommandGroup {
+  /** Group heading */
+  heading: string;
+  /** Items in this group */
+  items: CommandItem[];
+}
+
+/** Props for the CommandPalette component */
+export interface CommandPaletteProps {
+  /** Array of command groups */
+  groups: CommandGroup[];
+  /** Placeholder text for search input */
+  placeholder?: string;
+  /** Text to show when no results found */
+  emptyMessage?: string;
+  /** Whether the palette is open (controlled) */
+  open?: boolean;
+  /** Callback when open state changes */
+  onOpenChange?: (open: boolean) => void;
+  /** Whether to render as a modal dialog */
+  modal?: boolean;
+  /** Callback when any item is selected */
+  onSelect?: (itemId: string) => void;
+  /** Additional className for the root element */
+  className?: string;
+  /** Additional className for the input */
+  inputClassName?: string;
+  /** Additional className for the list */
+  listClassName?: string;
+}
+
+/** Search icon for the input */
+function SearchIcon() {
+  return (
+    <svg
+      width="15"
+      height="15"
+      viewBox="0 0 15 15"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="text-gray-400"
+    >
+      <path
+        d="M10 6.5C10 8.433 8.433 10 6.5 10C4.567 10 3 8.433 3 6.5C3 4.567 4.567 3 6.5 3C8.433 3 10 4.567 10 6.5ZM9.30884 10.0159C8.53901 10.6318 7.56251 11 6.5 11C4.01472 11 2 8.98528 2 6.5C2 4.01472 4.01472 2 6.5 2C8.98528 2 11 4.01472 11 6.5C11 7.56251 10.6318 8.53901 10.0159 9.30884L12.8536 12.1464C13.0488 12.3417 13.0488 12.6583 12.8536 12.8536C12.6583 13.0488 12.3417 13.0488 12.1464 12.8536L9.30884 10.0159Z"
+        fill="currentColor"
+        fillRule="evenodd"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
+
+/** The command palette content (can be used standalone or in a dialog) */
+function CommandPaletteContent({
+  groups,
+  placeholder = "Search commands...",
+  emptyMessage = "No results found.",
+  onSelect,
+  className = "",
+  inputClassName = "",
+  listClassName = "",
+}: Omit<CommandPaletteProps, "open" | "onOpenChange" | "modal">) {
+  return (
+    <Command
+      className={`w-full bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden ${className}`}
+      loop
+    >
+      {/* Search input */}
+      <div className="flex items-center gap-2 px-3 border-b border-gray-200">
+        <SearchIcon />
+        <Command.Input
+          placeholder={placeholder}
+          className={`w-full py-3 text-sm bg-transparent border-0 outline-none placeholder:text-gray-400 ${inputClassName}`}
+        />
+      </div>
+
+      {/* Command list */}
+      <Command.List
+        className={`max-h-80 overflow-y-auto p-2 ${listClassName}`}
+      >
+        {/* Empty state */}
+        <Command.Empty className="py-6 text-center text-sm text-gray-500">
+          {emptyMessage}
+        </Command.Empty>
+
+        {/* Command groups */}
+        {groups.map((group) => (
+          <Command.Group
+            key={group.heading}
+            heading={group.heading}
+            className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-gray-500"
+          >
+            {group.items.map((item) => (
+              <Command.Item
+                key={item.id}
+                value={`${item.label} ${item.keywords?.join(" ") || ""}`}
+                disabled={item.disabled}
+                onSelect={() => {
+                  item.onSelect?.();
+                  onSelect?.(item.id);
+                }}
+                className="flex items-center gap-2 px-2 py-2 text-sm text-gray-700 rounded cursor-pointer aria-selected:bg-gray-100 aria-disabled:opacity-50 aria-disabled:cursor-not-allowed"
+              >
+                {/* Optional icon */}
+                {item.icon && (
+                  <span className="text-gray-500">{item.icon}</span>
+                )}
+
+                {/* Label */}
+                <span className="flex-1">{item.label}</span>
+
+                {/* Keyboard shortcut */}
+                {item.shortcut && (
+                  <kbd className="px-1.5 py-0.5 text-xs font-mono text-gray-500 bg-gray-100 border border-gray-200 rounded">
+                    {item.shortcut}
+                  </kbd>
+                )}
+              </Command.Item>
+            ))}
+          </Command.Group>
+        ))}
+      </Command.List>
+    </Command>
+  );
+}
+
+/** Main CommandPalette component - renders as modal dialog when modal=true */
+export function CommandPalette({
+  open,
+  onOpenChange,
+  modal = true,
+  ...contentProps
+}: CommandPaletteProps) {
+  // If not modal, just render the content directly
+  if (!modal) {
+    return <CommandPaletteContent {...contentProps} />;
+  }
+
+  // Modal version with dialog
+  return (
+    <Command.Dialog
+      open={open}
+      onOpenChange={onOpenChange}
+      className="fixed inset-0 z-50"
+    >
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 bg-black/50"
+        onClick={() => onOpenChange?.(false)}
+      />
+
+      {/* Dialog content */}
+      <div className="fixed left-1/2 top-1/4 -translate-x-1/2 w-full max-w-lg">
+        <CommandPaletteContent {...contentProps} />
+      </div>
+    </Command.Dialog>
+  );
+}
+
+export default CommandPalette;

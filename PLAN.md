@@ -7,8 +7,9 @@ A component showcase site where the visual style comes entirely from `.md` promp
 
 ## Tech Stack
 
-- **Framework**: Remix (React + SSR for SEO, no Next)
-- **Styling**: Tailwind CSS
+- **Framework**: React Router 7 (Remix v2 merged into RR, React + SSR)
+- **Bundler**: Vite
+- **Styling**: Tailwind CSS v4
 - **Primitives**: Radix UI + cmdk (unstyled accessible components)
 - **Auth**: Custom (sessions + OAuth, built in-house)
 - **Database**: Aiven PostgreSQL
@@ -53,28 +54,28 @@ A component showcase site where the visual style comes entirely from `.md` promp
 
 ---
 
-## Components (Initial Harness Set)
+## Components (18 Harnesses)
 
-- Button
-- Input
-- Textarea
-- Select
-- Checkbox / Radio
-- Toggle
-- Card
-- Modal / Dialog
-- Dropdown Menu
-- Command Palette
-- Tooltip
-- Popover
-- Toast / Notification
-- Avatar
-- Badge
-- Table
-- Tabs
-- Accordion
-- Breadcrumb
-- Pagination
+See COMPONENTS.md for full descriptions.
+
+1. Button
+2. Card
+3. Typography
+4. Form
+5. Table
+6. Alert
+7. Dialog
+8. Dropdown Menu
+9. Tabs
+10. Command Palette
+11. Toast
+12. Navigation Bar
+13. Pricing Card
+14. Badge
+15. Accordion
+16. Pagination
+17. Hero Section
+18. Footer
 
 ---
 
