@@ -19,18 +19,23 @@ const availableStyles: Style[] = [
     fonts: ["Inter"],
     price: 0,
   },
+  {
+    id: "electric-chaos",
+    name: "Electric Chaos",
+    content: "",
+    fonts: ["Space Grotesk", "Unbounded"],
+    price: 0,
+  },
 ];
 
 export default function ShowcaseLayout() {
   return (
     <StyleProvider styles={availableStyles} defaultStyleId="default">
-      <div className="min-h-screen bg-white">
+      <div className="h-screen flex flex-col bg-white overflow-hidden">
         <TopNav />
-
-        {/* Main Layout */}
-        <div className="flex">
+        <div className="flex flex-1 overflow-hidden">
           <Sidebar />
-          <main className="flex-1 overflow-auto">
+          <main className="flex-1 overflow-auto hide-scrollbar">
             <Outlet />
           </main>
         </div>

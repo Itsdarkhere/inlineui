@@ -15,6 +15,7 @@ import * as Harnesses from "../harnesses";
 
 // Styled components
 import * as MinimalClean from "../styles/minimal-clean";
+import * as ElectricChaos from "../styles/electric-chaos";
 
 export interface ComponentRendererProps {
   /** The name of the component to render (e.g., "Button", "Card") */
@@ -33,6 +34,10 @@ export function ComponentRenderer({ componentName }: ComponentRendererProps) {
   // Render based on active style
   if (styleId === "minimal-clean") {
     return <MinimalCleanDemo componentName={componentName} />;
+  }
+
+  if (styleId === "electric-chaos") {
+    return <ElectricChaosDemo componentName={componentName} />;
   }
 
   // Default: render from harnesses
@@ -773,6 +778,297 @@ function CommandPaletteDemo() {
           console.log("Selected:", id);
           setOpen(false);
         }}
+      />
+    </div>
+  );
+}
+
+/**
+ * Renders demos using electric-chaos styled components
+ */
+function ElectricChaosDemo({ componentName }: { componentName: string }) {
+  switch (componentName) {
+    case "Button":
+      return (
+        <div className="space-y-6 p-6 bg-black rounded-2xl">
+          <div className="space-y-3">
+            <p className="text-xs font-bold uppercase tracking-widest text-purple-400">Variants</p>
+            <div className="flex flex-wrap gap-3">
+              <ElectricChaos.Button variant="primary">Primary</ElectricChaos.Button>
+              <ElectricChaos.Button variant="secondary">Secondary</ElectricChaos.Button>
+              <ElectricChaos.Button variant="outline">Outline</ElectricChaos.Button>
+              <ElectricChaos.Button variant="ghost">Ghost</ElectricChaos.Button>
+              <ElectricChaos.Button variant="destructive">Destructive</ElectricChaos.Button>
+            </div>
+          </div>
+          <div className="space-y-3">
+            <p className="text-xs font-bold uppercase tracking-widest text-pink-400">Sizes</p>
+            <div className="flex flex-wrap items-center gap-3">
+              <ElectricChaos.Button size="sm">Small</ElectricChaos.Button>
+              <ElectricChaos.Button size="md">Medium</ElectricChaos.Button>
+              <ElectricChaos.Button size="lg">Large</ElectricChaos.Button>
+            </div>
+          </div>
+        </div>
+      );
+
+    case "Card":
+      return (
+        <div className="max-w-md">
+          <ElectricChaos.Card>
+            <ElectricChaos.CardHeader>
+              <h3 className="text-lg font-bold text-white">Card Title</h3>
+              <p className="text-sm text-purple-300 mt-1">Card description</p>
+            </ElectricChaos.CardHeader>
+            <ElectricChaos.CardBody>
+              <p className="text-gray-300">This is the card body content with electric chaos styling.</p>
+            </ElectricChaos.CardBody>
+            <ElectricChaos.CardFooter>
+              <ElectricChaos.Button variant="outline" size="sm">Cancel</ElectricChaos.Button>
+              <ElectricChaos.Button size="sm">Save</ElectricChaos.Button>
+            </ElectricChaos.CardFooter>
+          </ElectricChaos.Card>
+        </div>
+      );
+
+    case "Badge":
+      return (
+        <div className="space-y-6 p-6 bg-black rounded-2xl">
+          <div className="space-y-3">
+            <p className="text-xs font-bold uppercase tracking-widest text-cyan-400">Variants</p>
+            <div className="flex flex-wrap gap-2">
+              <ElectricChaos.Badge variant="default">Default</ElectricChaos.Badge>
+              <ElectricChaos.Badge variant="primary">Primary</ElectricChaos.Badge>
+              <ElectricChaos.Badge variant="success">Success</ElectricChaos.Badge>
+              <ElectricChaos.Badge variant="warning">Warning</ElectricChaos.Badge>
+              <ElectricChaos.Badge variant="error">Error</ElectricChaos.Badge>
+            </div>
+          </div>
+        </div>
+      );
+
+    case "Alert":
+      return (
+        <div className="space-y-4 max-w-lg">
+          <ElectricChaos.Alert variant="info" title="Information">
+            This is an informational message with chaos.
+          </ElectricChaos.Alert>
+          <ElectricChaos.Alert variant="success" title="Success">
+            Your changes have been saved with style.
+          </ElectricChaos.Alert>
+          <ElectricChaos.Alert variant="warning" title="Warning">
+            Please review before continuing.
+          </ElectricChaos.Alert>
+          <ElectricChaos.Alert variant="error" title="Error">
+            Something went wrong spectacularly.
+          </ElectricChaos.Alert>
+        </div>
+      );
+
+    case "Typography":
+      return <ElectricChaos.Typography />;
+
+    case "Form":
+      return (
+        <div className="max-w-md">
+          <ElectricChaos.Form />
+        </div>
+      );
+
+    case "Table":
+      return <ElectricChaos.TableExample />;
+
+    case "Pagination":
+      return <ElectricChaos.PaginationExample />;
+
+    case "NavigationBar":
+      return (
+        <ElectricChaos.NavigationBar
+          logo="InlineUI"
+          links={[
+            { label: "Home", href: "#", isActive: true },
+            { label: "Components", href: "#" },
+            { label: "Pricing", href: "#" },
+            { label: "Docs", href: "#" },
+          ]}
+          showSearch
+          ctaText="Get Started"
+        />
+      );
+
+    case "HeroSection":
+      return (
+        <ElectricChaos.HeroSection
+          heading="Build beautiful interfaces faster"
+          subheading="A collection of beautifully designed, production-ready components you can copy and paste into your apps."
+          buttons={[
+            { label: "Get Started", href: "#", variant: "primary" },
+            { label: "View Components", href: "#", variant: "secondary" },
+          ]}
+        />
+      );
+
+    case "Footer":
+      return (
+        <ElectricChaos.Footer
+          logo="InlineUI"
+          tagline="Beautiful components for modern applications."
+          columns={[
+            {
+              title: "Product",
+              links: [
+                { label: "Components", href: "#" },
+                { label: "Pricing", href: "#" },
+                { label: "Changelog", href: "#" },
+              ],
+            },
+            {
+              title: "Company",
+              links: [
+                { label: "About", href: "#" },
+                { label: "Blog", href: "#" },
+                { label: "Careers", href: "#" },
+              ],
+            },
+          ]}
+          socialLinks={[
+            { platform: "twitter", href: "#" },
+            { platform: "github", href: "#" },
+          ]}
+          copyright="2024 InlineUI. All rights reserved."
+        />
+      );
+
+    case "PricingCard":
+      return (
+        <div className="max-w-sm">
+          <ElectricChaos.PricingCard
+            name="Pro"
+            price="$29"
+            period="month"
+            description="For growing teams that need more power."
+            features={[
+              { text: "Unlimited components", included: true },
+              { text: "Priority support", included: true },
+              { text: "Custom theming", included: true },
+              { text: "White-label license", included: false },
+            ]}
+            ctaText="Start Free Trial"
+            highlighted
+          />
+        </div>
+      );
+
+    case "Dialog":
+      return (
+        <div className="p-6 bg-black rounded-2xl">
+          <ElectricChaos.Dialog
+            trigger={<ElectricChaos.Button>Open Dialog</ElectricChaos.Button>}
+            title="Dialog Title"
+            description="This is a chaotic dialog description."
+          >
+            <p className="text-gray-300">Dialog content goes here with maximum chaos.</p>
+          </ElectricChaos.Dialog>
+        </div>
+      );
+
+    case "DropdownMenu":
+      return (
+        <div className="p-6 bg-black rounded-2xl">
+          <ElectricChaos.DropdownMenu
+            trigger={<ElectricChaos.Button variant="outline">Open Menu</ElectricChaos.Button>}
+            items={[
+              { id: "profile", label: "Profile", shortcut: "Ctrl+P" },
+              { id: "settings", label: "Settings", shortcut: "Ctrl+," },
+              { type: "separator" },
+              { id: "logout", label: "Log out" },
+            ]}
+          />
+        </div>
+      );
+
+    case "Tabs":
+      return (
+        <div className="max-w-lg">
+          <ElectricChaos.Tabs
+            tabs={[
+              { id: "overview", label: "Overview", content: <p className="text-gray-300">Overview content with chaos.</p> },
+              { id: "features", label: "Features", content: <p className="text-gray-300">Features content explodes here.</p> },
+              { id: "pricing", label: "Pricing", content: <p className="text-gray-300">Pricing that pops.</p> },
+            ]}
+          />
+        </div>
+      );
+
+    case "Accordion":
+      return (
+        <div className="max-w-lg">
+          <ElectricChaos.Accordion
+            items={[
+              { id: "item-1", title: "What is InlineUI?", content: "InlineUI is chaos in component form." },
+              { id: "item-2", title: "How do I get started?", content: "Just dive in headfirst." },
+              { id: "item-3", title: "Can I customize?", content: "Everything explodes with possibility." },
+            ]}
+          />
+        </div>
+      );
+
+    case "Toast":
+      return (
+        <div className="space-y-4 p-6 bg-black rounded-2xl">
+          <p className="text-sm text-purple-300">Click to unleash chaos notifications.</p>
+          <ElectricChaos.ToastProvider>
+            <ElectricChaosToastDemo />
+          </ElectricChaos.ToastProvider>
+        </div>
+      );
+
+    case "CommandPalette":
+      return <ElectricChaosCommandPaletteDemo />;
+
+    default:
+      return (
+        <div className="text-purple-400 text-sm p-6 bg-black rounded-2xl">
+          No demo available for "{componentName}"
+        </div>
+      );
+  }
+}
+
+function ElectricChaosToastDemo() {
+  const { addToast } = ElectricChaos.useToast();
+  return (
+    <div className="flex flex-wrap gap-2">
+      <ElectricChaos.Button variant="outline" size="sm" onClick={() => addToast({ title: "CHAOS", description: "Maximum chaos achieved.", variant: "default" })}>
+        Show Toast
+      </ElectricChaos.Button>
+      <ElectricChaos.Button variant="secondary" size="sm" onClick={() => addToast({ title: "SUCCESS", description: "Nailed it.", variant: "success" })}>
+        Success Toast
+      </ElectricChaos.Button>
+    </div>
+  );
+}
+
+function ElectricChaosCommandPaletteDemo() {
+  const [open, setOpen] = React.useState(false);
+  return (
+    <div className="space-y-4 p-6 bg-black rounded-2xl">
+      <ElectricChaos.Button variant="primary" onClick={() => setOpen(true)}>
+        Open Command Palette
+      </ElectricChaos.Button>
+      <ElectricChaos.CommandPalette
+        open={open}
+        onOpenChange={setOpen}
+        groups={[
+          {
+            heading: "Navigation",
+            items: [
+              { id: "home", label: "Go to Home", shortcut: "G H" },
+              { id: "components", label: "Go to Components", shortcut: "G C" },
+            ],
+          },
+        ]}
+        onSelect={() => setOpen(false)}
       />
     </div>
   );

@@ -19,7 +19,7 @@ export function TopNav() {
   }, []);
 
   return (
-    <nav className="h-14 border-b border-[#e5e5e5] bg-white flex items-center justify-between px-6 font-sans">
+    <nav className="h-[49px] shrink-0 border-b border-[#e5e5e5] bg-white flex items-center justify-between px-6 font-sans">
       {/* Logo */}
       <div className="text-[#111] font-semibold text-lg tracking-tight">
         InlineUI

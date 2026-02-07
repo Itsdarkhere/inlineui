@@ -1,33 +1,52 @@
 import { NavLink } from "react-router";
 
 const components = [
-  { name: "Button", path: "/showcase/button" },
-  { name: "Card", path: "/showcase/card" },
-  { name: "Typography", path: "/showcase/typography" },
-  { name: "Form", path: "/showcase/form" },
-  { name: "Table", path: "/showcase/table" },
-  { name: "Alert", path: "/showcase/alert" },
-  { name: "Dialog", path: "/showcase/dialog" },
-  { name: "Dropdown Menu", path: "/showcase/dropdown-menu" },
-  { name: "Tabs", path: "/showcase/tabs" },
-  { name: "Command Palette", path: "/showcase/command-palette" },
-  { name: "Toast", path: "/showcase/toast" },
-  { name: "Navigation Bar", path: "/showcase/navigation-bar" },
-  { name: "Pricing Card", path: "/showcase/pricing-card" },
-  { name: "Badge", path: "/showcase/badge" },
-  { name: "Accordion", path: "/showcase/accordion" },
-  { name: "Pagination", path: "/showcase/pagination" },
-  { name: "Hero Section", path: "/showcase/hero-section" },
-  { name: "Footer", path: "/showcase/footer" },
+  { name: "Button", path: "/button" },
+  { name: "Card", path: "/card" },
+  { name: "Typography", path: "/typography" },
+  { name: "Form", path: "/form" },
+  { name: "Table", path: "/table" },
+  { name: "Alert", path: "/alert" },
+  { name: "Dialog", path: "/dialog" },
+  { name: "Dropdown Menu", path: "/dropdown-menu" },
+  { name: "Tabs", path: "/tabs" },
+  { name: "Command Palette", path: "/command-palette" },
+  { name: "Toast", path: "/toast" },
+  { name: "Navigation Bar", path: "/navigation-bar" },
+  { name: "Pricing Card", path: "/pricing-card" },
+  { name: "Badge", path: "/badge" },
+  { name: "Accordion", path: "/accordion" },
+  { name: "Pagination", path: "/pagination" },
+  { name: "Hero Section", path: "/hero-section" },
+  { name: "Footer", path: "/footer" },
 ];
 
 export function Sidebar() {
   return (
-    <aside
-      className="w-[220px] h-full border-r border-[#e5e5e5] bg-white font-sans overflow-y-auto"
-      style={{ minHeight: "calc(100vh - 49px)" }}
-    >
+    <aside className="w-[220px] shrink-0 border-r border-[#e5e5e5] bg-white font-sans overflow-y-auto hide-scrollbar">
       <nav className="py-4">
+        {/* Home link */}
+        <NavLink
+          to="/"
+          end
+          className={({ isActive }) =>
+            `block px-4 py-2 text-sm font-medium transition-colors ${
+              isActive
+                ? "bg-[#111] text-white"
+                : "text-[#111] hover:bg-[#e5e5e5]"
+            }`
+          }
+        >
+          Overview
+        </NavLink>
+
+        {/* Separator */}
+        <div className="my-3 mx-4 border-t border-[#e5e5e5]" />
+
+        {/* Components */}
+        <div className="px-4 py-1">
+          <span className="text-xs font-medium text-[#999] uppercase tracking-wide">Components</span>
+        </div>
         <ul className="space-y-0">
           {components.map((component) => (
             <li key={component.path}>
