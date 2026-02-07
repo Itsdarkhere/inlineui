@@ -17,12 +17,12 @@ export default function ShowcaseHome() {
       {/* Hero */}
       <div className="mb-12">
         <h1 className="text-3xl font-semibold text-[#111] tracking-tight">
-          Style prompts for AI-generated components
+          Art direction for AI
         </h1>
         <p className="mt-3 text-[#666] max-w-xl">
-          Pick a style. Download the .md. Feed it to AI.
+          Markdown files for art direction.
           <br />
-          Get consistent, beautiful components in any framework.
+          Find a style you like. Download it. AI builds in that style forever.
         </p>
 
         {/* Style Toggle */}
