@@ -26,6 +26,34 @@ const availableStyles: Style[] = [
     fonts: ["Space Grotesk", "Unbounded"],
     price: 0,
   },
+  {
+    id: "corporate-classic",
+    name: "Corporate Classic",
+    content: "",
+    fonts: ["Inter"],
+    price: 0,
+  },
+  {
+    id: "startup-modern",
+    name: "Startup Modern",
+    content: "",
+    fonts: ["Inter"],
+    price: 0,
+  },
+  {
+    id: "editorial",
+    name: "Editorial",
+    content: "",
+    fonts: ["Playfair Display", "Inter"],
+    price: 0,
+  },
+  {
+    id: "fintech-precision",
+    name: "Fintech Precision",
+    content: "",
+    fonts: ["IBM Plex Sans", "JetBrains Mono"],
+    price: 0,
+  },
 ];
 
 export default function ShowcaseLayout() {
